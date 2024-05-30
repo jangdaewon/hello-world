@@ -11,6 +11,7 @@ pipeline {
             steps {
                 script {
                     try {
+                        sh "chmod +x ./mvnw"
                         sh "./mvnw clean package"
                     }
                     catch (err) {
