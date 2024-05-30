@@ -5,18 +5,13 @@ def repoUrl = scm.userRemoteConfigs[0].url
 def failed_stage_name
 
 pipeline {
-    agent {
-        node {
-            label 'mi-build'
-            customWorkspace '/remote/skyfall/build-central/workspace/MI/td-etlhot-be'
-        }
-    }
+    agent any
     stages {
         stage('Build source code') {
             steps {
                 script {
                     try {
-                        sh "mvn clean package"
+                        sh "./mvnw clean package"
                     }
                     catch (err) {
                         env.BUILD_STATUS = 'FAILURE'
